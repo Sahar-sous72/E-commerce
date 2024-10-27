@@ -1,16 +1,12 @@
-import { required } from "joi";
 import mongoose from "mongoose";
-import { Schema } from "mongoose";
-
+import { Schema ,Types} from "mongoose";
 const userSchema =new Schema({
     userName:{
         type:String,
-        required:true
+        //required:true
     },email:{
         type:String,
-        required:true,
         unique:true
-    
     },password:{
         type:String,
         required:true 
@@ -25,14 +21,15 @@ const userSchema =new Schema({
     },phone:{
         type:String
     },address:{
+        type:String
+    },statues:{
         type:String,
-        required:true
-    },statue:{
-        type:String,
-        enum:['active','not-active']
+        enum:['active','not-active'],
+        default:'not-active'
     },role:{
         type:String,
-        enum:['user','admin']
+        enum:['user','admin'],
+        default:'user'
     }
 },{
     timestamps:true

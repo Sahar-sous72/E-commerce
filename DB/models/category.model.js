@@ -1,19 +1,19 @@
-import { required } from "joi";
 import mongoose from "mongoose";
-import { Schema } from "mongoose";
+import { Schema ,Types} from "mongoose";
 
 const categorySchema=new Schema({
     name:{
         type:String,
         required:true
     },image:{
-        type:String
+        type:Object,
+        required:true
     },status:{
         type:String,
         enum:['active','not-active']
 
     },
-    createdBy:{
+   /* createdBy:{
     type:Types.ObjectId,
     ref:'User',
     required:true
@@ -21,7 +21,7 @@ const categorySchema=new Schema({
         type:Types.ObjectId,
         ref:'User',
         required:true
-        }
+        }*/
 },{
     timestamps:true
 })
