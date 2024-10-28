@@ -3,21 +3,24 @@ import { Schema ,Types} from "mongoose";
 const userSchema =new Schema({
     userName:{
         type:String,
-        //required:true
+        required:true
     },email:{
         type:String,
-        unique:true
+        unique:true,
+        required:true
     },password:{
         type:String,
         required:true 
     },gender:{
         type:String,
-        enum:['Male','Female']
+        enum:['Male','Female'],
+        required:true
     },confirmEmail:{
         type:Boolean,
         default:false
     },image:{
-        type:String
+        type:Object,
+        required:true
     },phone:{
         type:String
     },address:{

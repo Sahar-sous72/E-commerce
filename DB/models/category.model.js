@@ -13,15 +13,15 @@ const categorySchema=new Schema({
         enum:['active','not-active']
 
     },
-   /* createdBy:{
+    createdBy:{
     type:Types.ObjectId,
     ref:'User',
-    required:true
+   // required:true
     },updatedBy:{
         type:Types.ObjectId,
         ref:'User',
-        required:true
-        }*/
+       // required:true
+        }
 },{
     timestamps:true
 })

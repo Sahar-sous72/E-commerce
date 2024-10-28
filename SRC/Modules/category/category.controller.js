@@ -2,10 +2,11 @@
 import categoryModel from "../../../DB/models/category.model.js";
 import { AppError } from "../../../appError.js";
 import { AppSucc } from "../../../AppSucc.js";
+import userModel from "../../../DB/models/user.model.js";
 import cloudinary from "./../../Utils/cloudinary/cloudinary.js"
 
 export const createCategory=async(req,res,next)=>{
-   req.body.createdBy=req.id;
+  
     req.body.name=req.body.name.toLowerCase();
     const name =req.body.name;
     const status=req.body.status;
@@ -19,6 +20,7 @@ export const createCategory=async(req,res,next)=>{
     req.body.image={secure_url,public_id}
     
     }
+    req.body.createdBy=req.id;
     const category=await categoryModel.create(req.body)
     return next(new AppSucc("success",200))
 
@@ -60,7 +62,7 @@ export const updateCategory=async (req,res,next)=>{
   await cloudinary.uploader.destroy(category.image.public_id)
 
   if(req.file){
-    const {secure_url,public_id}=await cloudinary.uploader.upload(req.file.path,{folder:`${process.env.APPNAME}/category`});
+    const {secure_url,public_id}=await cloudinary.uploader.upload(req.file.path,{folder:`${process.env.APPNAME}/category`});  // حتى يتخزن داخل ملف كاتيغوري داخل مجلد ايكوميرس في الكلاوندري
     req.body.image={secure_url,public_id}
   }
   const newCategort=await categoryModel.findByIdAndUpdate(req.params.id,{
