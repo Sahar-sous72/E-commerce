@@ -5,7 +5,7 @@ import cloudinary from "./../../Utils/cloudinary/cloudinary.js"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import categoryModel from "../../../DB/models/category.model.js";
-import { sendEmail } from './../../utils/sendEmail.js'
+import { sendEmail } from './../../Utils/sendEmail.js'
 import { LoginSchema } from "./user.validation.js";
 
 //register
