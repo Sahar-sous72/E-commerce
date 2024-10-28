@@ -33,7 +33,7 @@ export const admin=async(req,res,next)=>{
     
     //return res.json(req.role)
     if(req.role !== "admin"){
-      return next(new AppError("You don't have authentication to create category",404))
+      return next(new AppError("You don't have authentication to create,update and delete your own categories ",404))
     }
     next();
 }catch(error){

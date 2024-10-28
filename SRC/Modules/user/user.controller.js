@@ -4,6 +4,7 @@ import userModel from "../../../DB/models/user.model.js";
 import cloudinary from "./../../Utils/cloudinary/cloudinary.js"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import categoryModel from "../../../DB/models/category.model.js";
 import { sendEmail } from './../../utils/sendEmail.js'
 import { LoginSchema } from "./user.validation.js";
 
@@ -56,4 +57,16 @@ export const login=async(req,res,next)=>{
     })
     return res.status(201).json({message:"success",token})
 
+}
+
+//get admin category
+export const getCategories=async(req,res,next)=>{
+    const createdBy=req.id;
+    //return res.json(userId)
+    const categories=await categoryModel.find({createdBy});
+    if(! categories){
+       return next(new AppSucc("No categories yet",201))
+    }
+
+    return res.status(201).json({message:"success",categories})
 }
