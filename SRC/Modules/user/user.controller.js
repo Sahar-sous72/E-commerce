@@ -23,11 +23,11 @@ export const register =async(req,res,next)=>{
      <h2 style='text-align:center;color:blue;width:40%'>Hello <b>${userName}</b> , You are register in our site ,How can help you?</h2>
     </div>
     `
-    sendEmail(email,"WELCOME",html);
+   /* sendEmail(email,"WELCOME",html);
     if(req.file){
         const {secure_url,public_id} =await cloudinary.uploader.upload(req.file.path,{folder:`${process.env.APPNAME}/user`});
         req.body.image={secure_url,public_id}
-    }
+    }*/
     req.body.password=hashPass;
     req.body.userName=userName
    // return res.json(req.body)
@@ -52,7 +52,7 @@ export const login=async(req,res,next)=>{
     if(!match){
         return next(new AppError("invalid password ",409))
     }
-    const token=await jwt.sign({id:user._id},process.env.Signiture,{
+    const token=await jwt.sign({id:user._id,role:user.role},process.env.Signiture,{
         expiresIn:'3h'
     })
     return res.status(201).json({message:"success",token})
