@@ -11,7 +11,6 @@ const productSchema=new Schema({
     },
     subImages:[{
         type:Object,
-        required:true
     }]
     ,status:{
         type:String,
@@ -35,13 +34,21 @@ const productSchema=new Schema({
         type:Number,
         default:0
     }
-    ,colors:[String]
+    ,
+    pricrAfterDiscount:{
+        type:Number
+    },colors:[String]
     , categoryId:{
         type:Types.ObjectId,
         ref:'Category',
         required:true
     }
-    ,
+    ,size:{
+        type:String,
+        enum:['sm','md','lg','x-lg','xx-lg','xxx-lg'],
+        default:'md'
+
+    },
     subCategoryId:{
         type:Types.ObjectId,
         ref:'subCategory',
