@@ -23,13 +23,15 @@ export const register =async(req,res,next)=>{
      <h2 style='text-align:center;color:blue;width:40%'>Hello <b>${userName}</b> , You are register in our site ,How can help you?</h2>
     </div>
     `
-   /* sendEmail(email,"WELCOME",html);
+    sendEmail(email,"WELCOME",html);
+    /*
     if(req.file){
         const {secure_url,public_id} =await cloudinary.uploader.upload(req.file.path,{folder:`${process.env.APPNAME}/user`});
         req.body.image={secure_url,public_id}
     }*/
     req.body.password=hashPass;
-    req.body.userName=userName
+    req.body.userName=userName;
+    req.body.email=email;
    // return res.json(req.body)
     const newUser =await userModel.create(req.body);
    // return res.json(newUser)

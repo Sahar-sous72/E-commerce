@@ -14,7 +14,7 @@ const initApp=(app,express)=>{
     app.use(express.json());
     app.use('/auth',authRouter)
     app.use('/category',categoryRouter)
-    app.use('/subcategory',subCategoryRouter)
+   // app.use('/subcategory',subCategoryRouter)
    
     app.use('*',(req,res,next)=>{
         return next(new AppError("page not found",400))

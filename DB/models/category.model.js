@@ -23,8 +23,18 @@ const categorySchema=new Schema({
        // required:true
         }
 },{
-    timestamps:true
+    timestamps:true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
 })
+categorySchema.virtual("subCategory",{
+    localField:'_id',
+    foreignField:'categoryId',
+    ref:'subCategory'
+}
+   
+    
+)
 
 const categoryModel =mongoose.model('Category',categorySchema);
 

@@ -7,10 +7,11 @@ import cloudinary from "../../Utils/cloudinary/cloudinary.js"
 import categoryModel from "../../../DB/models/category.model.js";
 
 export const createsubCategory=async(req,res,next)=>{
- // return res.json(req.body)
+  //return res.json(req.params)
 
-  const  {categoryId} =req.body;
-  const category =await categoryModel.findById(categoryId)
+ // const categoryId =req.params;
+  req.body.categoryId=req.params.categoryId;
+  const category =await categoryModel.findById(req.params.categoryId)
  // return res.json(req.body.categoryId)
   if(! category){
     return next(new AppError("Category not found",404))

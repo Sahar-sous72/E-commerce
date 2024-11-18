@@ -6,10 +6,12 @@ import { auth,admin, roles } from "../../MiddleWare/auth.js";
 import { createCategorySchema } from "./category.validation.js";
 import validation from "../../MiddleWare/validation.js";
 import { endPoints } from "./category.roles.js";
+import subCategoryRouter from './../subCategory/subCategory.router.js'
+
 const app =Router();
 
 
-
+app.use('/:categoryId/subcategory',subCategoryRouter)
 //create category
 app.post('/create',auth(endPoints.create),admin,fileUpload().single('image'),validation(createCategorySchema),asyncHandler(categoryController.createCategory));
 

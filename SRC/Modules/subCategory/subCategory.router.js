@@ -6,7 +6,7 @@ import { auth,admin, roles } from "../../MiddleWare/auth.js";
 import { createCategorySchema } from "./subCategory.validation.js";
 import validation from "../../MiddleWare/validation.js";
 import { endPoints } from "./subCategory.roles.js";
-const app =Router();
+const app =Router({mergeParams:true});
 
 
 
@@ -23,6 +23,6 @@ app.get('/getCategory/:id',auth(endPoints.getById),asyncHandler(subCategoryContr
 app.patch('/update/:id',auth(endPoints.update),fileUpload().single('image'),asyncHandler(subCategoryController.updateCategory))
 
 //delete subcategory
-app.delete('/delete/:id',auth(endPoints.delete),asyncHandler(subCategoryController.deleteCategory))
+app.delete('/:id',auth(endPoints.delete),asyncHandler(subCategoryController.deleteCategory))
 
 export default app;

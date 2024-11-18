@@ -4,6 +4,7 @@ import { AppError } from "../../../appError.js";
 import { AppSucc } from "../../../AppSucc.js";
 import userModel from "../../../DB/models/user.model.js";
 import cloudinary from "./../../Utils/cloudinary/cloudinary.js"
+import subCategoryModel from "../../../DB/models/subCategory.model.js";
 
 export const createCategory=async(req,res,next)=>{
   
@@ -78,11 +79,15 @@ export const updateCategory=async (req,res,next)=>{
 
 //delete category
 export const deleteCategory=async(req,res,next)=>{
+  const subCategories=await subCategoryModel.find({categoryId:req.params.id})
+ // return res.json(subCategories);
 const category =await categoryModel.findByIdAndDelete(req.params.id);
 
 if(!category){
   return next(new AppError("category does not exit",404))
 }
 await cloudinary.uploader.destroy(category.image.public_id)
+await subCategoryModel.deleteMany({categoryId:req.params.id});
+
 return next(new AppSucc("success",201))
 }
