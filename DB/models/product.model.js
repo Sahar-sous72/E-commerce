@@ -30,6 +30,9 @@ const productSchema=new Schema({
         type:Number,
         required:true
     },
+    finalPrice:{
+        type:Number,
+    },
     discount:{
         type:Number,
         default:0
